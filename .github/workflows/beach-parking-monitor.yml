@@ -22,6 +22,8 @@ on:
 jobs:
   monitor-parking:
     runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Madrid
     
     steps:
     - name: Checkout repository
