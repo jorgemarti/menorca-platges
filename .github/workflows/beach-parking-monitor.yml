@@ -13,7 +13,7 @@ on:
   
   # Run on push for testing (remove in production)
   push:
-    branches: [ main ]
+    branches: [ master ]
     paths: 
       - 'script2.py'
       - '.github/workflows/beach-parking-monitor.yml'
