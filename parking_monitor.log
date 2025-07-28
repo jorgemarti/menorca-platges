@@ -1,0 +1,19 @@
+2025-07-28 14:11:54,883 - INFO - Starting beach parking status monitor
+2025-07-28 14:11:54,887 - INFO - Current UTC time: 2025-07-28 12:11:54.887061
+2025-07-28 14:11:54,887 - INFO - Fetching data from http://mout.cime.es/ParkingsPlatges.aspx
+2025-07-28 14:11:55,210 - INFO - Successfully fetched page (status: 200)
+2025-07-28 14:11:55,265 - INFO - Found 4 PLA_linia divs
+2025-07-28 14:11:55,266 - INFO - Parsed beach 1: Macarella - Accés només amb bus
+2025-07-28 14:11:55,267 - INFO - Parsed beach 2: Son Saura - Tancat
+2025-07-28 14:11:55,267 - INFO - Parsed beach 3: La Vall - Obert
+2025-07-28 14:11:55,268 - INFO - Parsed beach 4: Cala'n Turqueta - Tancat
+2025-07-28 14:11:55,279 - INFO - Successfully parsed 4 parking records
+2025-07-28 14:11:56,529 - INFO - Successfully initialized Supabase client
+2025-07-28 14:11:56,529 - INFO - Attempting to save 4 records to database
+2025-07-28 14:11:57,305 - INFO - HTTP Request: POST https://eauoqujgzoqdhbwcjquo.supabase.co/rest/v1/parking_status?columns=%22beach_name%22%2C%22status%22%2C%22recorded_at%22 "HTTP/2 201 Created"
+2025-07-28 14:11:57,317 - INFO - Successfully saved 4 records to database
+2025-07-28 14:11:57,318 - INFO - Saved: Macarella - Accés només amb bus at 2025-07-28T14:11:55.266323+00:00
+2025-07-28 14:11:57,319 - INFO - Saved: Son Saura - Tancat at 2025-07-28T14:11:55.266323+00:00
+2025-07-28 14:11:57,321 - INFO - Saved: La Vall - Obert at 2025-07-28T14:11:55.266323+00:00
+2025-07-28 14:11:57,322 - INFO - Saved: Cala'n Turqueta - Tancat at 2025-07-28T14:11:55.266323+00:00
+2025-07-28 14:11:57,323 - INFO - Successfully processed 4 parking records

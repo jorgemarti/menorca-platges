@@ -1,0 +1,62 @@
+name: Beach Parking Status Monitor
+
+on:
+  schedule:
+    # Run every 5 minutes during beach hours (8 AM to 8 PM UTC)
+    # Adjust timezone as needed - this is for UTC
+    - cron: '*/5 8-20 * * *'
+    # Run every 2 hours during off-peak times
+    - cron: '0 */2 * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+  
+  # Run on push for testing (remove in production)
+  push:
+    branches: [ main ]
+    paths: 
+      - 'script2.py'
+      - '.github/workflows/beach-parking-monitor.yml'
+
+jobs:
+  monitor-parking:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run parking status scraper
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      run: |
+        python script2.py
+    
+    - name: Upload logs on failure
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: error-logs
+        path: |
+          *.log
+          /tmp/*.log
+        retention-days: 7
